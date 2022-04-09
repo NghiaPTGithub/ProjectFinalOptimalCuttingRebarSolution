@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RevitAddInOptimalCuttingRebarSolution
+namespace RevitAddInOptimalCuttingRebarSolution.Model.Rebar
 {
-    public class Class1
+    public class RebarForm
     {
         #region Property
         #endregion
@@ -15,6 +15,6 @@ namespace RevitAddInOptimalCuttingRebarSolution
         #endregion
 
         #region Method
-        #endregion 
+        #endregion
     }
 }

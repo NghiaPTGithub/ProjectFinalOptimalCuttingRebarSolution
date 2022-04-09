@@ -75,6 +75,10 @@
     <Compile Include="Application\CutRebarApp.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Command\CutRebarCmd.cs" />
+    <Compile Include="Model\ElementContain\ElementContainRebar.cs" />
+    <Compile Include="Model\Rebar\InputRebar.cs" />
+    <Compile Include="Model\Rebar\RebarForm.cs" />
+    <Compile Include="Model\Material\MaterialModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -112,6 +116,7 @@
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
     <Compile Include="zLibrary\GA\ProcessCutRebar.cs" />
+    <Compile Include="Model\Rebar\RebarElement.cs" />
     <Compile Include="zLibrary\Utils.cs" />
     <Compile Include="zLibrary\DataRebarInformation.cs" />
     <Compile Include="zLibrary\DotBienArrayList.cs" />
@@ -163,9 +168,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\CutRebarIcon.32.png" />
   </ItemGroup>

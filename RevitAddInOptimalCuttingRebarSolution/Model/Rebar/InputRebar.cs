@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RevitAddInOptimalCuttingRebarSolution.zLibrary.GA
+namespace RevitAddInOptimalCuttingRebarSolution.Model.Rebar
 {
-    public class ProcessCutRebar
+    public class InputRebar
     {
 
     }
