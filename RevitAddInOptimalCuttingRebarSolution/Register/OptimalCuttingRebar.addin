@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+    <AddIn Type="Application">
+        <Name>Cut Rebar Add-in</Name>
+        <Assembly>RevitAddInOptimalCuttingRebarSolution.dll</Assembly>
+        <AddInId>B9255BEB-F5FB-45C7-9D31-BC65FDF60EB7</AddInId>
+        <FullClassName>RevitAddInOptimalCuttingRebarSolution.Application.CutRebarApp</FullClassName>
+        <VendorId>AddinNghia220108</VendorId>
+        <VendorDescription>Phạm Trung Nghĩa, phamtrungnghia.57xf.nuce@gmail.com</VendorDescription>
+    </AddIn>
+</RevitAddIns>

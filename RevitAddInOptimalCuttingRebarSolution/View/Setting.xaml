@@ -1,0 +1,288 @@
+﻿<Window
+    x:Class="RevitAddInOptimalCuttingRebarSolution.View.Setting"                   
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"                  
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                  
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                    
+    xmlns:local="clr-namespace:RevitAddInOptimalCuttingRebarSolution.View"       
+    Name="windowSetting"    
+    mc:Ignorable="d"      
+    xmlns:viewmodel="clr-namespace:RevitAddInOptimalCuttingRebarSolution.ViewModel"     
+    d:DataContext="{d:DesignInstance Type=viewmodel:SettingViewModel}"                         
+    Height="auto"            
+    Width="500"               
+    Title="Setting"              
+    WindowStartupLocation="CenterScreen"            
+    Style="{DynamicResource window001}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="/RevitAddInOptimalCuttingRebarSolution;component/Resource/MainResource.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+
+        <StackPanel
+            Orientation="Vertical" 
+            Height="auto">
+            <TextBlock
+                Style="{StaticResource tbl001}"                       
+                Width="auto"                    
+                Text="Genetic Algorithm Parameter"                     
+                FontSize="18"                     
+                Margin="10">
+            </TextBlock>
+            <StackPanel
+                Orientation="Horizontal"                         
+                Margin="0" >
+                <TextBlock                       
+                    Style="{StaticResource tbl001 }"                                                  
+                    Text="Population size (kich thuoc quan the)"                                                 
+                    Width="350">
+                </TextBlock>
+                <TextBox
+                    Style="{StaticResource tbx001 }"                         
+                    Width="100"                         
+                    Name="tbxPopulationSize"                         
+                    Text="{Binding PopulationSize}"                        
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                         
+                Style="{StaticResource tbl001 }"                        
+                HorizontalAlignment="Left"                         
+                FontSize="12"                       
+                Text="{Binding ElementName=tbxPopulationSize, Path=Text, Converter={StaticResource messPopulationSizeConverter}}"                       
+                Foreground="Red"                        
+                Margin="5 0 5 0"                     
+                Padding="5 0 5 5"
+                Width="auto"                        
+                Height="auto">
+            </TextBlock>
+            
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="0">
+                <TextBlock
+                    Style="{StaticResource tbl001 }"                    
+                    Text="Max Generation Quantity (SL the he toi da)"
+                    Width="350">
+                </TextBlock>
+                <TextBox
+                    Style="{StaticResource tbx001 }"                         
+                    Width="100"                         
+                    Name="tbxMaxGenerationQuantity"                         
+                    Text="{Binding MaxGenerationQuantity}"                         
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                         
+                Style="{StaticResource tbl001 }"                        
+                HorizontalAlignment="Left"                       
+                FontSize="12"                       
+                Text="{Binding ElementName=tbxMaxGenerationQuantity, Path=Text, Converter={StaticResource messMaxGenerationQuantity}}"                         
+                Foreground="Red"                       
+                Margin="5 0 5 0"                       
+                Padding="5 0 5 5"   
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+            
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock 
+                    Style="{StaticResource tbl001 }"                           
+                    Text="Ratio Hybridize Element (TL lai ghep element)"                          
+                    Width="350">
+                </TextBlock>
+                <TextBox 
+                    Style="{StaticResource tbx001 }"                       
+                    Width="100"                        
+                    Name="tbxRatioHybridizeElement"                        
+                    Text="{Binding RatioHybridizeElement}"                       
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                        
+                Style="{StaticResource tbl001 }"                      
+                HorizontalAlignment="Left"                        
+                FontSize="12"                       
+                Text="{Binding ElementName=tbxRatioHybridizeElement, Path=Text, Converter={StaticResource messRatioHybridizeElement}}"                    
+                Foreground="Red"                     
+                Margin="5 0 5 0"                       
+                Padding="5 0 5 5"  
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock 
+                    Style="{StaticResource tbl001 }"                          
+                    Text="Ratio Mutate Element (TL dot bien element)"                          
+                    Width="350">
+                </TextBlock>
+                <TextBox
+                    Style="{StaticResource tbx001 }"                        
+                    Width="100"                        
+                    Name="tbxRatioMutateElement"                        
+                    Text="{Binding RatioMutateElement}"                         
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                        
+                Style="{StaticResource tbl001 }"                      
+                HorizontalAlignment="Left"                      
+                FontSize="12"                      
+                Text="{Binding ElementName=tbxRatioMutateElement, Path=Text, Converter={StaticResource messRatioMutateElement}}"                    
+                Foreground="Red"                      
+                Margin="5 0 5 0"                       
+                Padding="5 0 5 5"    
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock 
+                    Style="{StaticResource tbl001 }"                          
+                    Text="Ratio Mutate Local (TL dot bien cuc bo)"                          
+                    Width="350">
+                </TextBlock>
+                <TextBox 
+                    Style="{StaticResource tbx001 }"                        
+                    Width="100"                         
+                    Name="tbxRatioMutateLocal"                         
+                    Text="{Binding RatioMutateLocal}"                         
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                        
+                Style="{StaticResource tbl001 }"                        
+                HorizontalAlignment="Left"                   
+                FontSize="12"                      
+                Text="{Binding ElementName=tbxRatioMutateLocal, Path=Text, Converter={StaticResource messRatioMutateElementLocal}}"                 
+                Foreground="Red"                    
+                Margin="5 0 5 0"                    
+                Padding="5 0 5 5"   
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock
+                    Style="{StaticResource tbl001 }"                    
+                    Text="Factor Mutate Element (he so dot bien lement)"                    
+                    Width="350">
+                </TextBlock>
+                <TextBox 
+                    Style="{StaticResource tbx001 }"                        
+                    Width="100"                        
+                    Name="tbxFactorMutateElement"                       
+                    Text="{Binding FactorMutateElement}"                         
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock 
+                      
+                Style="{StaticResource tbl001 }"                       
+                HorizontalAlignment="Left"                       
+                FontSize="12"                      
+                Text="{Binding ElementName=tbxFactorMutateElement, Path=Text, Converter={StaticResource messFactorMutateElement}}"                     
+                Foreground="Red"                      
+                Margin="5 0 5 0"                     
+                Padding="5 0 5 5" 
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock
+                    Style="{StaticResource tbl001 }"                     
+                    Text="Factor Mutate Local (he so dot bien cuc bo)"                    
+                    Width="350">
+                </TextBlock>
+                <TextBox 
+                    Style="{StaticResource tbx001 }"                        
+                    Width="100"                         
+                    Name="tbxFactorMutateLocal"                         
+                    Text="{Binding FactorMutateLocal}"                       
+                    TextAlignment="Right">
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock       
+                Style="{StaticResource tbl001 }"
+                HorizontalAlignment="Left" 
+                FontSize="12"
+                Text="{Binding ElementName=tbxFactorMutateLocal, Path=Text, Converter={StaticResource messFactorMutateLocal}}" 
+                Foreground="Red"
+                Margin="5 0 5 0"
+                Padding="5 0 5 5"
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Style="{StaticResource tbl001 }"                          
+                    Text="Ratio Mutate Element Local (TLDBCB tai element)"                         
+                    Width="350">
+                </TextBlock>
+                <TextBox
+                    Style="{StaticResource tbx001 }"                         
+                    Width="100"                        
+                    Name="tbxRatioMutateElementLocal"                        
+                    Text="{Binding RatioMutateElementLocal}"                         
+                    TextAlignment="Right" >
+                </TextBox>
+            </StackPanel>
+            
+            <!--mess-->
+            <TextBlock                        
+                Style="{StaticResource tbl001 }"                      
+                HorizontalAlignment="Left"                         
+                FontSize="12"                       
+                Text="{Binding ElementName=tbxRatioMutateElementLocal, Path=Text, Converter={StaticResource messRatioMutateElementLocal}}"                      
+                Foreground="Red"                       
+                Margin="5 0 5 0"                       
+                Padding="5 0 5 5"     
+                Width="auto"                
+                Height="auto">
+            </TextBlock>
+
+            <Grid Margin="0 0 0 10">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Style="{StaticResource btMenu }"
+                    Content="OK"
+                    Background="#FFEFD5"
+                    Command="{Binding GetSetting}">
+                </Button>
+                <Button 
+                    Grid.Column="1"
+                    Style="{StaticResource btMenu }"
+                    Content="Default"
+                    Command="{Binding SetDefaultSetting}"
+                    Background="#FFEFD5">
+                </Button>
+            </Grid>
+        </StackPanel>
+        
+    </Grid>
+</Window>

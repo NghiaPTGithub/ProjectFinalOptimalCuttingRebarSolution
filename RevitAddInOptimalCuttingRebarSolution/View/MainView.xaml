@@ -1,0 +1,120 @@
+﻿<Window x:Class="RevitAddInOptimalCuttingRebarSolution.View.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RevitAddInOptimalCuttingRebarSolution.View"
+        xmlns:lib="clr-namespace:RevitAddInOptimalCuttingRebarSolution.zLibrary"
+        mc:Ignorable="d" 
+        xmlns:viewmodel="clr-namespace:RevitAddInOptimalCuttingRebarSolution.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"        
+        Style="{DynamicResource window001}"
+        WindowStartupLocation="CenterScreen"
+        Title="Nghia Add-in CutRebar"
+        Height="auto"
+        Width="auto"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="/RevitAddInOptimalCuttingRebarSolution;component/Resource/MainResource.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Horizontal" >
+            <Button x:Name="btSelectElement"
+                    Style="{StaticResource btMenu }"
+                    Content="Select Data"
+                    Command="{Binding OpenSelectView}"
+                    CommandParameter="{Binding ElementName=MainWindow}"                    
+                    ></Button>
+            <Button x:Name="btMaterial"
+                    Style="{StaticResource btMenu }"
+                    Content="Material"
+                    Command="{Binding OpenMaterialView }"
+                    ></Button>
+            <Button x:Name="btSetting"
+                    Style="{StaticResource btMenu }"
+                    Content="Setting" 
+                    Command="{Binding OpenSettingView}"
+                    ></Button>
+            <Button x:Name="btCutRebar"
+                    Style="{StaticResource btMenu }"
+                    Content="Cut Rebar"  
+                    Command="{Binding CutRebarCommand}"
+                    ></Button>
+            <Button x:Name="btReport"
+                    Style="{StaticResource btMenu }"
+                    Content="Report" 
+                    Command="{Binding OpenReportView}"
+                    ></Button>
+            <Button x:Name="btDraw"
+                    Style="{StaticResource btMenu }"
+                    Content="Draw"                    
+                    >
+            </Button>
+
+        </StackPanel >
+        <ScrollViewer x:Name="scvViewSelect"
+                      VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled" 
+                      Grid.Row=" 1"                         
+                      >
+            <ListView Name="lvMainView"
+                      ItemsSource="{Binding SelectedRebarInfor}" 
+                      BorderThickness="1"
+                      BorderBrush="Black"   
+                      >
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="False">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="14" VerticalAlignment="Bottom" />
+                                                        <TextBlock Text="{Binding ItemCount}" FontSize="14" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                        <TextBlock Text=" item(s)" FontSize="14" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <ListView.View>
+                    <GridView >
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="FontSize" Value="15"></Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn Header="IDRebar" Width="100 " DisplayMemberBinding="{Binding IDRebar}"></GridViewColumn>
+                        <GridViewColumn Header="Lenght(mm)" Width="100" DisplayMemberBinding="{Binding Lenght}"></GridViewColumn>
+                        <GridViewColumn Header="Diameter(mm)" Width="100" DisplayMemberBinding="{Binding Diameter}"></GridViewColumn>
+                        <GridViewColumn Header="Material" Width="200" DisplayMemberBinding="{Binding Diameter}"></GridViewColumn>
+                        <GridViewColumn 
+                            Header="Form" 
+                            DisplayMemberBinding="{Binding Diameter}"
+                            Width="500">
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</Window>
