@@ -115,7 +115,8 @@
     <Compile Include="View\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="zLibrary\GA\ProcessCutRebar.cs" />
+    <Compile Include="zLibrary\GA\GA.cs" />
+    <Compile Include="zLibrary\ProcessHandelData\ProcessCutRebar.cs" />
     <Compile Include="Model\Rebar\RebarElement.cs" />
     <Compile Include="zLibrary\Utils.cs" />
     <Compile Include="zLibrary\DataRebarInformation.cs" />

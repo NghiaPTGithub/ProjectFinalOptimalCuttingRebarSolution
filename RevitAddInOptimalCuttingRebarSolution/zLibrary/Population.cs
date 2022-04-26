@@ -30,35 +30,35 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
         internal IndividualChainElement BestIndividual;
         public Population(int slCaTheMax, int slTheHeMax, List<ElementGA> listPhanTuGen, List<Steel> listSteel)
         {
-            this.Populationsize = slCaTheMax;
-            this.MaxGenerationQuantity = slTheHeMax;
-            this.GenerationQuantity = 0;
-            this.ListElementGene = listPhanTuGen;
-            this.ListIndividual = new List<IndividualChainElement>();
-            this.ListSteelUsed = listSteel;
-            this.IndividualSize = ListElementGene.Count;
-            this.RatioHybridizeElement = 0.5;
-            this.RatioMutateElement = 0.5;
-            this.RatioMutateLocal = 0.9;
-            this.FactorMutateElement = 2;
-            this.FactorMutateLocal = 2;
-            this.RatioMutateElementLocal = 0.8;
+            Populationsize = slCaTheMax;
+            MaxGenerationQuantity = slTheHeMax;
+            GenerationQuantity = 0;
+            ListElementGene = listPhanTuGen;
+            ListIndividual = new List<IndividualChainElement>();
+            ListSteelUsed = listSteel;
+            IndividualSize = ListElementGene.Count;
+            RatioHybridizeElement = 0.5;
+            RatioMutateElement = 0.5;
+            RatioMutateLocal = 0.9;
+            FactorMutateElement = 2;
+            FactorMutateLocal = 2;
+            RatioMutateElementLocal = 0.8;
 
             //Setup id
-            this.CountSteel = 0;
-            this.CountRebar = 0;
-            this.CountElementGA = 0;
-            this.CountIndividual = 0;
+            CountSteel = 0;
+            CountRebar = 0;
+            CountElementGA = 0;
+            CountIndividual = 0;
             foreach (Steel steel in ListSteelUsed)
             {
-                steel.ID = this.CreateNewID("Steel");
+                steel.ID = CreateNewID("Steel");
             }
             foreach (ElementGA elem in ListElementGene)
             {
-                elem.ID = this.CreateNewID("Element");
+                elem.ID = CreateNewID("Element");
                 foreach (Rebar_CayThep t in elem.ListRebar)
                 {
-                    t.ID = this.CreateNewID("Rebar");
+                    t.ID = CreateNewID("Rebar");
                 }
             }
         }
@@ -77,14 +77,14 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
                 throw KhongCoPhanTu;
             }
             //2. Sinh ngau nhien 1 chuoi trinh tu element cho toi khi so ca the dat SLCaTheMax
-            IndividualChainElement t0 = new IndividualChainElement(this.CreateNewID("Sequence"), ListElementGene);
+            IndividualChainElement t0 = new IndividualChainElement(CreateNewID("Sequence"), ListElementGene);
             t0.TinhChiPhiTyLeHaoHutKL(ListSteelUsed);
             ListIndividual.Add(t0);
             while (ListIndividual.Count < Populationsize)
             {
                 //Sinh chuoi trinh tu cac element
                 IndividualChainElement t = new IndividualChainElement();
-                t = MutateElement(t0, (int)(0.5 * IndividualSize), this.CreateNewID("Sequence"));
+                t = MutateElement(t0, (int)(0.5 * IndividualSize), CreateNewID("Sequence"));
                 t.TinhChiPhiTyLeHaoHutKL(ListSteelUsed);
                 ListIndividual.Add(t);
             }
@@ -182,7 +182,7 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
                 //chuyen list thep ve arraylist
                 ElementGA e = tg.ChainElement[j];
                 tg.ChainElement.RemoveAt(j);
-                tg.ChainElement.Insert(j, DotBienTaiElement(e, hesoDotBienCucBo, this.CreateNewID("Element")));
+                tg.ChainElement.Insert(j, DotBienTaiElement(e, hesoDotBienCucBo, CreateNewID("Element")));
             }
             return tg;
         }
@@ -318,7 +318,7 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
                 //for (int i = sizeLaiGhep; i < Populationsize; i++)
                 //{
                 //    IndividualChainElement trinhTuElementDotBien = new IndividualChainElement();
-                //    trinhTuElementDotBien = MutateElement(ListIndividual[i], FactorMutateElement, this.CreateNewID("Sequence"));
+                //    trinhTuElementDotBien = MutateElement(ListIndividual[i], FactorMutateElement, CreateNewID("Sequence"));
                 //    trinhTuElementDotBien.TinhChiPhiTyLeHaoHutKL(ListSteelUsed);
                 //    ListIndividual.Add(trinhTuElementDotBien);
                 //}
@@ -328,9 +328,9 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
                 foreach (IndividualChainElement individualChainElement in listMutateLocal)
                 {
                     IndividualChainElement trinhTuElementDotBienCucBo = new IndividualChainElement();
-                    trinhTuElementDotBienCucBo = MutateElementLocal(individualChainElement, RatioMutateElementLocal, FactorMutateLocal, this.CreateNewID("Sequence"));
+                    trinhTuElementDotBienCucBo = MutateElementLocal(individualChainElement, RatioMutateElementLocal, FactorMutateLocal, CreateNewID("Sequence"));
                     trinhTuElementDotBienCucBo.TinhChiPhiTyLeHaoHutKL(ListSteelUsed);
-                    this.ListIndividual.Add(trinhTuElementDotBienCucBo);
+                    ListIndividual.Add(trinhTuElementDotBienCucBo);
                 }
                 //2.4 Chon loc tu nhien
                 NaturalSelectionWithRulet();
@@ -531,61 +531,7 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary
         {
             var kq = ListIndividual.OrderBy(x => x.RatioWasteMass);
             ListIndividual = kq.ToList();
-        }
-        #region: refer code old
-        //public CaTheTrinhTu LaiGhepTrinhTu(CaTheTrinhTu c1,CaTheTrinhTu c2) 
-        //{
-        //    CaTheTrinhTu child = new CaTheTrinhTu();
-        //    child.TrinhTuPhanTu  = new LaiGhepArrayList(c1.TrinhTuPhanTu, c2.TrinhTuPhanTu).GetChildArrayList();
-        //    return child;
-        //}
-        //public CaTheTrinhTu DotBienTrinhTu(CaTheTrinhTu c,int hesoDotBien) 
-        //{
-        //    CaTheTrinhTu newTrinhTu = new CaTheTrinhTu();
-        //    newTrinhTu.TrinhTuPhanTu = new DotBienArrayList(c.TrinhTuPhanTu).GetNewArrayList(hesoDotBien);
-        //    return newTrinhTu;
-        //}
-        //public List<Thep> LaiGhepElement(TrinhTuElement t1, TrinhTuElement t2) 
-        //{
-        //    ArrayList arr1 = new ArrayList();arr1.AddRange(t1.ListElement);
-        //    ArrayList arr2 = new ArrayList(); arr2.AddRange(t2.ListElement);
-        //    ArrayList arrChild = new ArrayList();
-        //    arrChild = LaiGhepArrayList(arr1, arr2);
-        //    List<Element> listElementChild = new List<Element>();
-        //    listElementChild = ArrToListElement(arrChild);
-        //    return ListElementToListRebar(listElementChild);
-        //}
-        //public List <Thep > DotBienElement(TrinhTuElement t, int hesoDotBien) 
-        //{
-        //    ArrayList arr = new ArrayList(); arr.AddRange(t.ListElement);
-        //    ArrayList arrChild = new ArrayList();
-        //    arrChild = DotBienArrayList(arrChild,hesoDotBien);
-        //    List<Element> listElementChild = new List<Element>();
-        //    listElementChild = ArrToListElement(arrChild);
-        //    return ListElementToListRebar(listElementChild);
-        //}
-        //public List<Thep > DotBienCucBo(TrinhTuElement t, double tyleDotBien,int hesoDotBienCucBo) 
-        //{
-        //    if(0<tyleDotBien || tyleDotBien > 1) 
-        //    {
-        //        Exception e1 = new Exception("Gia tri ty le dot bien khong phu hop");
-        //        throw e1;
-        //    }
-        //    //so luong cac element duoc lay ra trong list element de dot bien cuc bo 
-        //    int slRandom =(int) tyleDotBien * t.ListElement.Count;
-        //    //tao trinh tu moi
-        //    TrinhTuElement tg = new TrinhTuElement();
-        //    tg = t;
-        //    //chon ngau nhien cac phan tu de tien hanh dot bien
-        //    List<int> listIndexElementDotBien = new List<int>();//list index cua cac phan tu dc chon ngau nhien de dot bien
-        //    listIndexElementDotBien = GetRandomIndex(t.ListElement.Count, tyleDotBien);
-        //    foreach(int j in listIndexElementDotBien) 
-        //    {
-        //        tg.ListElement[j].DotBienTrinhTuThep(hesoDotBienCucBo);
-        //    }
-        //    return tg.ToListThep();            
-        //}
-        #endregion
+        }      
     }
 }
 
