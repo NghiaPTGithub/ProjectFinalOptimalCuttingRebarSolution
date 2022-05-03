@@ -61,6 +61,7 @@ namespace RevitAddInOptimalCuttingRebarSolution.zLibrary.GA
                     child.Add(motherItem);
                 }
             }
+
             return child;
         }
     }
